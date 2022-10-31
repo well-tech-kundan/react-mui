@@ -1,12 +1,17 @@
-import { IconButton } from "@mui/material";
 import { AppbarContainer, AppbarHeader } from "../../styles/appbar";
-import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
+import SearchIcon from "@mui/icons-material/Search";
 import Actions from "./actions";
-
+import { IconButton } from "@mui/material";
+import { useUIContext } from "../../context/ui";
 
 
 function AppbarMobile({ matches }) {
+
+    //set drawer open status using UI context
+    const { setDrawerOpen, setShowSearchBox } = useUIContext();
+
+
     return (
         /** 49.34
          * This will have
@@ -20,7 +25,8 @@ function AppbarMobile({ matches }) {
 
         <AppbarContainer >
 
-            <IconButton>
+            {/* hook the menu icon button click to drawer open event */}
+            <IconButton onClick={() => setDrawerOpen(true)}>
                 <MenuIcon />
             </IconButton>
 
@@ -28,21 +34,11 @@ function AppbarMobile({ matches }) {
                 WellTech
             </AppbarHeader>
 
-            <IconButton>
+            {/* hook the search icon button click to search slider open event */}
+            <IconButton onClick={() => setShowSearchBox(true)}>
                 <SearchIcon />
             </IconButton>
 
-            {/* <HeaderList type="row">
-                <ListItemText primary="Home" />
-                <ListItemText primary="Dashboard" />
-                <ListItemText primary="Clubs" />
-                <ListItemText primary="Events" />
-                <ListItemButton>
-                    <ListItemIcon>
-                        <SearchIcon />
-                    </ListItemIcon>
-                </ListItemButton>
-            </HeaderList> */}
             <Actions matches={matches} />
         </AppbarContainer>
     );
