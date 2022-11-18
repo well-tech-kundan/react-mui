@@ -48,7 +48,10 @@ const theme = createTheme({
     values: {
 
       xs: 0,
+      galaxy:500,
       iphsmall: 400,
+      fold:300,
+      pcmedium: 1100,
       sm: 600,
       md: 900,
       lg: 1200,

@@ -1,11 +1,13 @@
 import { useTheme } from "@emotion/react";
-import { Avatar, Button, Divider, Drawer, Paper, Tooltip, Typography, useMediaQuery } from "@mui/material";
+import { Avatar, Button, Divider, Drawer, Fab, Grid, Paper, Tooltip, Typography, useMediaQuery } from "@mui/material";
 import { Box } from "@mui/system";
+import CloseIcon from "@mui/icons-material/Close";
+import DeleteIcon from "@mui/icons-material/Delete";
+
 import { useUIContext } from "../../context/ui";
 import { Colors } from "../../styles/theme";
-import DeleteIcon from "@mui/icons-material/Delete";
 import useWishList from "../../hooks/useWishList.js";
-import { favouriteViewMessages } from "../../data";
+import { WISHLIST_VIEW_MSG, SITE_LOCALE } from "../../data";
 import { EmptyImage } from "../../styles/cart";
 
 function WishList() {
@@ -17,6 +19,8 @@ function WishList() {
 
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('md'));
+    const matchesIpad = useMediaQuery(theme.breakpoints.up('sm'));
+    const matchesIphsmall = useMediaQuery(theme.breakpoints.down('iphsmall'));
 
     const wishListContent = wishList.map(item => (
         <Box key={item.id}>
@@ -61,13 +65,13 @@ function WishList() {
                     fontWeight="bold"
 
                 >
-                    {item.price ? "£" + item.price : ""}
+                    {item.price ? SITE_LOCALE + item.price : ""}
                 </Typography>
 
                 {!matches ?
                     (
                         // display tooltip for desktop display 
-                        <Tooltip placement="left" title={favouriteViewMessages.deletemessage}>
+                        <Tooltip placement="left" title={WISHLIST_VIEW_MSG.DELETE}>
                             <DeleteIcon key={item.id} onClick={addToWishList} />
                         </Tooltip>
                     ) : (
@@ -114,14 +118,14 @@ function WishList() {
                     variant={matches ? "h5" : "h4"}
                     color={Colors.black}
                 >
-                    {favouriteViewMessages.title}
+                    {WISHLIST_VIEW_MSG.TITLE}
                 </Typography>
                 <Typography
                     variant="body2"
                     color={Colors.muted}
                 >
                     {" "}
-                    {favouriteViewMessages.marketing}
+                    {WISHLIST_VIEW_MSG.MARKETING}
                 </Typography>
                 {/* check if the favourite list not empty then display favourite list othewise ignore click */}
                 {wishList.length > 0 ? (
@@ -139,37 +143,80 @@ function WishList() {
 
                             {wishListContent}
                         </Paper>
+                        <Grid container>
+                            <Grid item>
+                                <Fab
+
+                                    size="small"
+                                    sx={{
+                                        position: 'fixed',
+                                        top: "1em",
+                                        right: "2em",
+
+                                    }}>
+                                    <CloseIcon
+                                        sx={{
+                                            color: Colors.primary,
+                                            position: "fixed",
+                                            top: "0.9em",
+                                            right: "1.5em",
+                                            zIndex: 2000,
+                                            cursor: 'pointer',
+                                        }}
+                                        onClick={() => setShowWishList(false)}
+                                    />
+                                </Fab>
+                            </Grid>
+                        </Grid>
                     </>
 
-                ) : <>
+                ) :
+                    <>
 
-                    {/* cart is empty */}
-                    <Typography
-                        align={"center"}
-                        mt={2}
-                    >
-                        <Paper
-                            elevation={0}
-                            sx={{
-                                width: matches ? '83%' : '87%',
-                                padding: 4,
-                            }}
+                        {/* cart is empty */}
+                        <Typography
+                            align={"center"}
+                            mt={2}
                         >
-                            <EmptyImage src={favouriteViewMessages.nofavourites} />
-                            <Typography
-
-                                variant="h6"
+                            <Paper
+                                elevation={0}
                                 sx={{
-                                    mt: 1,
-                                    color: Colors.muted,
+                                    width: matches ? '83%' : '87%',
+                                    padding: 4,
                                 }}
-                                style={{ whiteSpace: 'pre-line' }}
                             >
-                                {favouriteViewMessages.nothing}
-                            </Typography>
-                        </Paper>
-                    </Typography>
-                </>
+                                <EmptyImage src={WISHLIST_VIEW_MSG.EMPTY_IMG} ml="11.rem"/>
+                                <Typography
+
+                                    variant="h6"
+                                    sx={{
+                                        mt: 1,
+                                        color: Colors.muted,
+                                    }}
+                                    style={{ whiteSpace: 'pre-line' }}
+                                >
+                                    {WISHLIST_VIEW_MSG.EMPTY}
+                                </Typography>
+                            </Paper>
+                        </Typography>
+                        <Grid container>
+                            <Grid item>
+
+                                <CloseIcon
+                                    sx={{
+                                        color: Colors.primary,
+                                        position: "fixed",
+                                        top: matchesIphsmall ? "4.5em" : matchesIpad && matches ? "4.5em" : matches ? "4.5em" : "5em",
+                                        right: matchesIphsmall ? "1.2em" : matchesIpad && matches ? "5em" : matches ? "1.5em" : "1.5em",
+                                        zIndex: 2000,
+                                        textShadow: "gray 1px 1px 12px",
+                                        cursor: 'pointer',
+                                    }}
+                                    onClick={() => setShowWishList(false)}
+                                />
+                            </Grid>
+                        </Grid>
+                    </>
                 }
             </Box >
             <Button

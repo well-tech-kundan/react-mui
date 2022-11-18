@@ -2,10 +2,8 @@ import {
   Divider,
   Drawer,
   Grid,
-  Link,
   List,
   ListItemButton,
-  ListItemText,
   styled,
 } from "@mui/material";
 import { useUIContext } from "../../context/ui";
@@ -13,6 +11,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { DrawerCloseButton } from "../../styles/appbar";
 import { lighten } from "polished";
 import { Colors } from "../../styles/theme";
+import { NavLink } from "react-router-dom";
 
 
 //define a style for divider, you can pass addition properties also in props
@@ -32,19 +31,22 @@ function AppDrawer({ menuitems: contentData }) {
   const renderMenu = contentData.map((menuitem) => (
     <Grid key={menuitem.id} >
 
-      <Link href={menuitem.url} underline="none" sx={{
+      <NavLink to={menuitem.url} underline="none" sx={{
 
         color: Colors.dove_gray,
         background: Colors.primary,
 
       }}>
         <ListItemButton
+          onClick={() => setTimeout(setDrawerOpen(false),1000) }
           sx={{
-
+            color: Colors.white,
+            textDecoration:'none',
             // on mouse hover change the colour the button
             "&:hover": {
               color: Colors.dove_gray,
-              background: lighten(0.2, Colors.primary)
+              background: lighten(0.2, Colors.primary),
+              textDecoration:'none',
             },
 
           }}
@@ -56,9 +58,9 @@ function AppDrawer({ menuitems: contentData }) {
 
           {/* using textdecoration for removing underline from the displayed menu name  */}
 
-          {menuitem.name}
+            {menuitem.name}
         </ListItemButton>
-      </Link>
+      </NavLink>
       <MiddleDivider />
     </Grid>
   ));

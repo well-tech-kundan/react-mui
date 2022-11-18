@@ -1,12 +1,12 @@
 import { useUIContext } from "../context/ui";
-import { wishlistAddActionMessages } from "../data";
+import { WISHLIST_ACTION_MSG } from "../data";
 
 /** 
  * This hook for handling cart data
  */
 function useWishList(product) {
 
-    const { wishList, setFavouriteList } = useUIContext();
+    const { wishList, setWishList } = useUIContext();
 
     /**
      * this function will add/remove selected product from UI Context to cart using 
@@ -15,9 +15,9 @@ function useWishList(product) {
 
         // add the prodcut if doesnot exist other wise remove the product
         wishList.findIndex((favlist) => favlist.id === product.id) >= 0 ?
-            setFavouriteList(wishList.filter(favlist => favlist.id !== product.id))
+            setWishList(wishList.filter(favlist => favlist.id !== product.id))
             :
-            setFavouriteList(favlist => [...favlist, product]);
+            setWishList(favlist => [...favlist, product]);
     }//end pf function add to cart
 
     /**
@@ -36,9 +36,9 @@ function useWishList(product) {
 
         // add the prodcut if doesnot exist other wise remove the product
         wishList.findIndex((c) => c.id === product.id) >= 0 ?
-            wishlistAddActionMessages.remove
+            WISHLIST_ACTION_MSG.REMOVE
             :
-            wishlistAddActionMessages.add;
+            WISHLIST_ACTION_MSG.ADD;
 
 
     return { addToWishList, addedToWishes, addToWishesText }

@@ -13,13 +13,15 @@ function useDialogModal(Component) {
         setOpen(true);
     }, []);
 
+    const onClose = () => { setOpen(false) };
+
     const DialogComponent = useCallback(
         ({ ...props }) => {
             if (!open) return null;
 
             if (Component) {
                 return (
-                    <Component open={open} onClose={() => setOpen(false)} {...props} />
+                    <Component open={open} onClose={onClose} {...props} />
                 );
             }
         },

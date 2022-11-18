@@ -2,11 +2,17 @@ import { AppbarContainer, AppbarHeader } from "../../styles/appbar";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import Actions from "./actions";
-import { IconButton } from "@mui/material";
+import { IconButton, useMediaQuery } from "@mui/material";
 import { useUIContext } from "../../context/ui";
+import { useTheme } from "@emotion/react";
 
 
 function AppbarMobile({ matches }) {
+
+
+    //use theme of material styles
+    const theme = useTheme();
+    const matchesFold = useMediaQuery(theme.breakpoints.down('fold'));
 
     //set drawer open status using UI context
     const { setDrawerOpen, setShowSearchBox } = useUIContext();
@@ -30,7 +36,7 @@ function AppbarMobile({ matches }) {
                 <MenuIcon />
             </IconButton>
 
-            <AppbarHeader textAlign={"center"} variant="h4">
+            <AppbarHeader textAlign={"center"} variant={matchesFold ?"h5" : "h4"}>
                 WellTech
             </AppbarHeader>
 

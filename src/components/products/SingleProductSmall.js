@@ -12,18 +12,18 @@ import ProductMetaSmall from "./ProductMetaSmall";
 import ProductDetail from "../productdetail";
 import useDialogModal from "../../hooks/useDialogModal";
 import useCart from "../../hooks/useCart";
-import { productdisplay } from "../../data";
+import { PROD_DISPLAY_SIZE } from "../../data";
 import useWishList from "../../hooks/useWishList";
 
 
 function SingleProductSmall({ product }) {
 
     // define dialog modal for showing product dialog details
-    const [ProductDetailDialog, showProductDetailDialog, closeProductDialog] =
+    const [ProductDetailDialog, showProductDetailDialog] =
         useDialogModal(ProductDetail);
 
     //define add to cart related variables to tbe used in the module
-    const { addToCart, addToCartText } = useCart(product);
+    const { addToCart, toggleActionTxt } = useCart(product);
 
     //define add to favourite related variable to tbe used in the module
     const { addToWishList, addedToWishes } = useWishList(product);
@@ -62,7 +62,7 @@ function SingleProductSmall({ product }) {
                                 </ProductActionButton>
 
                                 {/* display show product details to screen icon, onclick open product details dialog box*/}
-                                <ProductActionButton onClick={() => showProductDetailDialog()}>
+                                <ProductActionButton onClick={showProductDetailDialog}>
                                     <FitScreenIcon color="primary" />
                                 </ProductActionButton>
                             </Stack>
@@ -75,10 +75,10 @@ function SingleProductSmall({ product }) {
                     <ProductAddtoCart
                         variant="contained"
                         show={product.price ? 1 : 0}
-                        size={productdisplay.Small}
+                        size={PROD_DISPLAY_SIZE.SMALL}
                         onClick={addToCart}
                     >
-                        {addToCartText}
+                        {toggleActionTxt}
                     </ProductAddtoCart>
                 )}
             </>

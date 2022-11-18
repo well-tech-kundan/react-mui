@@ -5,7 +5,7 @@ import { Box } from "@mui/system";
 import theme, { Colors } from "../theme";
 import { slideInBottom, slideInRight } from "../../animation";
 import { lighten } from "polished";
-import { productdisplay } from "../../data";
+import { PROD_DISPLAY_SIZE } from "../../data";
 
 export const Product = styled(Box)(() => ({
     display: 'flex',
@@ -24,7 +24,17 @@ export const Product = styled(Box)(() => ({
 
     },
     [theme.breakpoints.down('lg')]: {
-        // as absolute and larger screen used set position relative
+        // as absolute and mobile screen used set position relative
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        width: '250px',
+        height: '300px',
+        borderRadius: '10px',
+        padding: '0px',
+        boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19)',
+    },
+    [theme.breakpoints.down('sm')]: {
+        // as absolute and small screen used set position relative
         flexDirection: 'column',
         justifyContent: 'flex-start',
         width: '250px',
@@ -32,9 +42,14 @@ export const Product = styled(Box)(() => ({
         borderRadius: '10px',
         boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19)',
     },
-    [theme.breakpoints.down('sm')]: {
-        //  
-
+    //for small phone7  mobile <= 400
+    [theme.breakpoints.down("iphsmall")]: {
+        width: '235px',
+    },
+    //for small galaxy  mobile <= 300
+    [theme.breakpoints.down("fold")]: {
+        width: '200px',
+        padding:'0px',
     },
 }));
 
@@ -44,6 +59,15 @@ export const ProductLarge = styled(Box)(() => ({
     alignItems: 'flex-start',
     position: 'relative',
     textAlign: 'center',
+    [theme.breakpoints.up('md')]: {
+        // as absolute and larger screen used set position relative
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        width: '310px',
+        height: '420px',
+        borderRadius: '10px',
+        boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19)',
+    },
     [theme.breakpoints.down('md')]: {
         // as absolute and larger screen used set position relative
         flexDirection: 'column',
@@ -53,9 +77,23 @@ export const ProductLarge = styled(Box)(() => ({
         borderRadius: '10px',
         boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19)',
     },
-    //for small phone7  mobile 
+    // for iPads 
+    [theme.breakpoints.up('sm')]: {
+        width: '290px',
+
+    },
+    // for galaxy mobile > 400
+    [theme.breakpoints.down('sm')]: {
+        width: '285px',
+
+    },
+    //for small phone7  mobile <= 400
     [theme.breakpoints.down("iphsmall")]: {
-        width: '280px',
+        width: '285px',
+    },
+    //for small phone7  mobile <= 400
+    [theme.breakpoints.down("fold")]: {
+        width: '225px',
     },
 }));
 
@@ -73,11 +111,18 @@ export const ProductThin = styled(Box)(() => ({
     height: '200px',
     borderRadius: '10px',
     boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19)',
+    //for small phone7  mobile <= 400
+    [theme.breakpoints.down("iphsmall")]: {
+        width: '255px',
+    },
+    [theme.breakpoints.down("fold")]: {
+        width: '200px',
+    },
 
 }));
 
 
-//style for displaying product in thin size 
+//style for displaying product in small size 
 export const ProductSmall = styled(Box)(() => ({
     display: 'flex',
     alignItems: 'flex-start',
@@ -90,6 +135,10 @@ export const ProductSmall = styled(Box)(() => ({
     height: '240px',
     borderRadius: '8px',
     boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19)',
+    //for small phone7  mobile <= 400
+    [theme.breakpoints.down("fold")]: {
+        width: '150px',
+    },
 
 }));
 //style for display product image need source and key
@@ -191,7 +240,14 @@ export const ProductImagLarge = styled('img')(({ src, key }) => ({
     borderRadius: '10px 10px 0px 0px',
     width: '100%',
     height: '55%',
+    
 
+    // for galaxy fold
+    [theme.breakpoints.down('fold')]: {
+        //  
+    padding: '0px',
+    width: '100%',
+    },
 
 }));
 
@@ -212,7 +268,7 @@ export const ProductImagThin = styled('img')(({ src, key }) => ({
 }));
 
 
-//style for display product thin size image need source and key
+//style for display product small size image need source and key
 export const ProductImagSmall = styled('img')(({ src, key }) => ({
 
 
@@ -263,6 +319,7 @@ export const ProductFavButton = styled(ProductActionButton, {
     },
     [theme.breakpoints.down("md")]: {
         background: lighten(0.05, Colors.light_gray),
+        fontSize: "small",
     },
 }));
 
@@ -273,7 +330,7 @@ export const ProductFavButton = styled(ProductActionButton, {
  * The prop isWish is not recognised by react that results console error.
  * To fix that can be controlled by passing object to handle that , see shouldForwardProp
  */
- export const WishProductFavButton = styled(ProductActionButton, {
+export const WishProductFavButton = styled(ProductActionButton, {
     shouldForwardProp: (prop) => prop !== 'isWish'
 })(({ isWish, theme }) => ({
 
@@ -296,6 +353,10 @@ export const ProductFavButton = styled(ProductActionButton, {
     },
 }));
 
+
+/**
+ * CSS setting for Add to Cart button
+ */
 export const ProductAddtoCart = styled(Button, {
     shouldForwardProp: (prop) => prop !== 'show'
 })(({ show, size, theme }) => ({
@@ -332,19 +393,57 @@ export const ProductAddtoCart = styled(Button, {
     [theme.breakpoints.down("md")]: {
         top: "2%",
         left: '2rem',
-        width: (size === productdisplay.Normal)?"100%":"150%",
+        width: (size === PROD_DISPLAY_SIZE.NORMAL) ? "100%" : "150%",
         alignItems: 'center',
         padding: "10px 5px",
         marginBottom: '1.5rem',
+    },
+    // for iPads 
+    [theme.breakpoints.up('sm')]: {
+        left: '2rem',
+        width: (size === PROD_DISPLAY_SIZE.NORMAL) ? "73%" : "80%",
+        alignItems: 'center',
+        padding: "10px 5px",
+        marginBottom: '1.5rem',
+
+    },
+    // for mobile device  
+    [theme.breakpoints.down('sm')]: {
+        left: '2rem',
+        width: (size === PROD_DISPLAY_SIZE.NORMAL) ? "75%" : "79%",
+        alignItems: 'center',
+        padding: "10px 5px",
+        marginBottom: '1.5rem',
+
+    },
+    [theme.breakpoints.down('galaxy')]: {
+        left: '2rem',
+        width: (size === PROD_DISPLAY_SIZE.NORMAL) ? "75%" : "79%",
+        alignItems: 'center',
+        padding: "10px 5px",
+        marginBottom: '1.5rem',
+
     },
     //for small phone7  mobile 
     [theme.breakpoints.down("iphsmall")]: {
         top: "2%",
         left: '2rem',
-        width: (size === productdisplay.Normal)?"117%":"148%",
+        width: (size === PROD_DISPLAY_SIZE.NORMAL) ? "117%" : "150%",
         alignItems: 'center',
         padding: "10px 5px",
         marginBottom: '1.5rem',
+    },
+    //for galaxy fold  mobile 
+    [theme.breakpoints.up("fold")]: {
+        width: (size === PROD_DISPLAY_SIZE.NORMAL) ? "75%" : "87%",
+    },
+    //for galaxy fold  mobile 
+    [theme.breakpoints.up("iphsmall")]: {
+        width: (size === PROD_DISPLAY_SIZE.NORMAL) ? "75%" : "79%",
+    },
+    //for small phone7  mobile 
+    [theme.breakpoints.down("fold")]: {
+        width: (size === PROD_DISPLAY_SIZE.NORMAL) ? "85%" : "97%",
     },
     //add background colour
     background: Colors.secondary,
@@ -355,25 +454,29 @@ export const ProductAddtoCart = styled(Button, {
 
 
 
+
 //wrapper for product meta description
-export const ProductMetaWrapper = styled(Box)(({ theme, wishlistpg = "false"}) => ({
+export const ProductMetaWrapper = styled(Box)(({ theme, wishlistpg = false, storepg = false }) => ({
     padding: 10,
-    marginLeft: wishlistpg ? '15px' : '0',
+    marginLeft: wishlistpg ? '30%' : '0',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     //for desktop
     [theme.breakpoints.up('md')]: {
         padding: 0,
-        width: "80%",
+        width: storepg ? "75%" : "80%",
         // set margin bottom to have some gap between to image grid rows.
         //marginBottom: '1.5rem',
-        marginTop: '-1.5rem',
+        marginTop: wishlistpg ? "0" : '-1.5rem',
         fontSize: '16.15px',
+
+        display: wishlistpg ? "grid" : "block",
     },
     // for mobiles
     [theme.breakpoints.down('md')]: {
         //  
+        marginLeft: "0%",
         fontSize: '12x',
     },
 }));
@@ -382,7 +485,7 @@ export const ProductMetaWrapper = styled(Box)(({ theme, wishlistpg = "false"}) =
 export const ProductMetaWrapperThin = styled(Box)(({ theme }) => ({
     position: 'absolute',
     bottom: '2%',
-    left:'5%',
+    left: '5%',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
 }));

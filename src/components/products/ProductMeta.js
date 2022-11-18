@@ -1,7 +1,10 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid,  Typography } from "@mui/material";
 import { ProductMetaWrapper } from "../../styles/products";
 import { Colors } from "../../styles/theme";
-import GradeIcon from '@mui/icons-material/Grade';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import Rating from '@mui/material/Rating';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import { SITE_LOCALE } from "../../data";
 
 
 /**
@@ -15,9 +18,9 @@ import GradeIcon from '@mui/icons-material/Grade';
  * @returns 
  */
 //matches is true for tabs and mobiles
-function ProductMeta({ product, matches, wishlistpg }) {
+function ProductMeta({ product, matches, wishlistpg, storepg }) {
     return (
-        <ProductMetaWrapper wishlistpg={wishlistpg}>
+        <ProductMetaWrapper wishlistpg={wishlistpg} storepg={storepg}>
             {/* display product rating if configured */}
             <Typography
                 variant={'h9'}
@@ -37,21 +40,30 @@ function ProductMeta({ product, matches, wishlistpg }) {
                         sx={{
                             color: Colors.secondary,
                         }}
+                        alignItems={"center"}
                     >
-                        {/* set icon size to large to match the font of rating */}
+                        {/* set icon size to large to match the font of rating 
                         <GradeIcon sx={{
                             fontSize: "large",
                             height: "1.15em",
                             paddingTop: "0px",
-                        }} />
-                        {product.rating}
+                        }} />*/}
+                        <Rating 
+                            name="half-rating-read" 
+                            value={product.rating} 
+                            getLabelText={(value) => `${product.rating} Heart${value !== 1 ? 's' : ''}`}
+                            precision={0.5}
+                            icon={<FavoriteIcon fontSize={matches ? "small" :"small"} color="secondary" />}
+                            readOnly 
+                            emptyIcon={<FavoriteBorderIcon fontSize={matches ? "small" :"small"} />}
+                        />
+                        {product.rating + "/5"}
                         {/* display booking offers if any */}
                         {product.bookingoffer ? (
                             <Grid
                                 sx={{
-                                    fontSize: "small",
+                                    fontSize: {matches} ? "0.8em" : "small",
                                     height: "1em",
-                                    paddingTop: "4px",
                                     paddingLeft: 1,
                                     color: Colors.dim_grey,
                                     fontWeight: 'regular',
@@ -120,7 +132,7 @@ function ProductMeta({ product, matches, wishlistpg }) {
                     color: Colors.dim_grey,
                 }}
             >
-                {product.price ? "£" + product.price : ""}
+                {product.price ? SITE_LOCALE + product.price : ""}
 
 
             </Typography>

@@ -6,14 +6,28 @@ import { useState } from "react";
 import { clamp } from "../clamp";
 import { Colors } from "../../../styles/theme";
 import { lighten } from "polished";
+import useCart from "../../../hooks/useCart";
 
-function IncDec({ available, quantity }) {
-    const clampV = clamp(0, available);
-    const [value, setValue] = useState(quantity);
+function IncDec(props) {
+
+    //define add to cart related variables to tbe used in the module
+    const { updateCart } = useCart(props.item);
+    const clampV = clamp(0, props.available);
+    const [value, setValue] = useState(props.item.quantity?props.item.quantity:1);
+
+    const handleChange = (val) =>{
+        // console.log("value in handleChange in IncDec :: "+val);
+        setValue(clampV(val));
+        updateCart(val);
+    };
+    
+
     return (
         <Box display="flex">
             <IconButton
                 sx={{
+                    height: props.matches?"0.9em" : "1.2em",
+                    width:"1em",
                     borderRadius: 0,
                     background: (value > 0 )?`${Colors.secondary}`:`${Colors.white}`,
                     color: (value === 0)?`${Colors.light_gray}`:`${Colors.black}`,
@@ -21,29 +35,35 @@ function IncDec({ available, quantity }) {
                         backgroundColor: (value > 0)?`${lighten(0.1,Colors.primary)}`:`${Colors.white}`,
                     },
                 }}
-                onClick={() => setValue(clampV(value - 1))}
+                onClick={() => {handleChange(value-1)}}
             >
                 <RemoveIcon />
             </IconButton>
             <Typography
-                variant="h6"
+                variant="body"
                 sx={{
+                    fontSize:props.matches?"1em" :"1.2em",
+                    height: props.matches?"1.23em" : "1.4em",
                     border: `1px solid ${Colors.secondary}`,
-                    p: 2,
+                    pl: 1,
+                    pr: 1,
+                    pt: 0,
                 }}
             >
                 {value}
             </Typography>
             <IconButton
                 sx={{
+                    height: props.matches?"0.9em" : "1.2em",
+                    width:"1em",
                     borderRadius: 0,
-                    background: (value < available)?`${Colors.secondary}`:`${Colors.white}`,
-                    color: (value === available)?`${Colors.light_gray}`:`${Colors.black}`,
+                    background: (value < props.available)?`${Colors.secondary}`:`${Colors.white}`,
+                    color: (value === props.available)?`${Colors.light_gray}`:`${Colors.black}`,
                     "&:hover": {
-                        backgroundColor: (value < available)?`${lighten(0.1,Colors.primary)}`:`${Colors.white}`,
+                        backgroundColor: (value < props.available)?`${lighten(0.1,Colors.primary)}`:`${Colors.white}`,
                     },
                 }}
-                onClick={() => setValue(clampV(value + 1))}
+                onClick={() => {handleChange(value+1)}}
             >
                 <AddIcon />
             </IconButton>

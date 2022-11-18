@@ -1,9 +1,20 @@
+/**
+ * 888888888888888888888888888888888888888888888888888888
+ * 
+ *         STATIC VARIABLES USED IN THE APPLICATION
+ * 
+ * &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+ */
+
+
+
 // this file contains all the mock data set to be used on the page
 
+export const SITE_LOCALE = "£";
 
 //site menu bar list
 
-export const menuitems = [
+export const MENU_ITEMS = [
 
     {
         id: 1,
@@ -37,11 +48,192 @@ export const menuitems = [
     }
 ];
 // site vision-statement text
-export const visionstatement =
+export const VISION_STATEMENT =
     "We are here to help people to improve their quality of life, by providing the environment to develope quality of nature that contains balance, peace, harmony, purity and clarity. We work togther with you to improve elementry dimensions of human nature - attribution, leisure, sympathy, motivation, and acceptance. We acknowledge your need to feel good and fit and offer services to cater your quest for authentic well-being. We believe in the possibility to make it a more accessible and sustainable daily achievement."
     ;
+
+/**
+ * 888888888888888888888888888888888888888888888888888888
+ * 
+ *              CART-VIEW DIALOG BOX CONFIGURATIONS
+ * 
+ * &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+ */
+
+
+/**
+ * Define view cart dialog box messages
+ */
+export const CART_VIEW = {
+    TITLE: 'Your Cart',
+    LOGIN_REG_MSG : 'Login/register for great deals and offers',
+    DO_PAYMENT_TXT : 'Proceed to payment',
+    EMPTY_CART_MSG: 'Your cart is empty!',
+    EMPTY_CART_SHOP_MSG: 'You have no item in your shopping cart.\nLet\'s go buy something!',
+    EMPTY_CART_IMG: '/images/cart/emptycart.png',
+    SHOP_MSG : 'Shop Now',
+    DELETE_MSG : 'Delete this product from your cart.',
+    LINK: '/viewcart',
+    TERM_CONDN:"By placing your order you agree to Welltech's Conditions of Use & Sale. Please see our Privacy Notice, our Cookies Notice and our Interest-Based Ads Notice.",
+    ORD_SUMRY : "Order Summary",
+    ORD_TOTAL : "Order Total:",
+    ORD_ITEMS : "Order Items",    
+    ORD_SUB_TOTAL : "Order Subotal:",
+    DLVRY_PCKG : "Postage & Packing:",
+    FREE : "FREE",
+    HELP_MSG : "Need help? Check our Help pages or contact us \n"+
+    "When you click the \"Buy now\" button, we'll send you an e-mail message acknowledging receipt of your order. Your contract to purchase an item will not be complete until we send you an e-mail to indicate that the item has been dispatched.\n"+
+    "Within 30 days of delivery, you may return new, unopened physical merchandise in its original condition. Exceptions and restrictions apply. See WellTech's Return Policy.",
+};
+
+/**
+ * Define Button text for Add Cart button
+ */
+ export const CART_ACTION_MSG = {
+    REMOVE : 'Remove from cart',
+    ADD : 'Add to cart',
+};
+
+
+/**
+ * Define view cart default setting
+ */
+ export const CART_DEFAULT_SETTINGS = {
+    AVAILABLE:6,
+ }
+
+/**
+ * 888888888888888888888888888888888888888888888888888888
+ * 
+ *             WISHLIST DIALOG BOX CONFIGURATIONS
+ * 
+ * &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+ */
+
+/**
+ * Define WISH LIST view  messages
+ */
+ export const WISHLIST_VIEW_MSG = {
+    TITLE: 'Your Wish List',
+    MARKETING : 'You can manage Wish-List at any time.',
+    DELETE : 'Remove this product from your whish list.',
+    EMPTY:'You have not added any items yet.\n\nTo add items to your whish-list, look out for the heart symbol on the items.',
+    EMPTY_IMG:'/images/whishlist/nolist.png',
+};
+
+/**
+ * Define Button text for Add Cart button
+ */
+ export const WISHLIST_ACTION_MSG = {
+    REMOVE : 'Remove from Wishlist',
+    ADD : 'Add to Wishlist',
+};
+
+/**
+ * 888888888888888888888888888888888888888888888888888888
+ * 
+ *             STORE PAGE CONFIGURATIONS
+ * 
+ * &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+ */
+
+/**
+ * Define view cart  messages
+ */
+ export const STORE_FILTER = {
+    TITLE: 'Filter Products',
+    CLEAR_FILTER_TXT: 'Clear Filters',
+};
+
+/**
+ * Define Button text for Add Cart button
+ */
+ export const STORE_DELIVERY_TYPE = {
+    FAST : 'Fast Delivery',
+    FOUR_DAYS : '4 days delivery',
+};
+
+/**
+ * Define Button text for Add Cart button
+ */
+ export const STORE_PRODUCT_BTN_TXT = {
+    SHARE : 'Share',
+    LEARN_MORE : 'Learn More',
+    ADD_TO_WHISHLIST : 'Add to Whishlist',
+    REMOVE_WHISHLIST : 'In Whishlist',
+};
+
+/**
+ * 888888888888888888888888888888888888888888888888888888
+ * 
+ *             PRODUCT DISPLAY CONFIGURATIONS
+ * 
+ * &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+ */
+
+/**
+ * show message on the product view list to view all or view less
+ */
+ export const PROD_LIST_VIEW = {
+    MORE: 'View more >',
+    LESS: 'View less <',
+};
+
+
+/**
+ * show message on the product view list to view all or view less
+ */
+ export const PROD_ACTION_TOOLTIP = {
+    DETAILED_VIEW: 'View product details.',
+    SHARE: 'Share this product.',
+    ADD_TO_WHISHLIST: 'Add to Your Wishlist',
+};
+/**
+ * product display size
+ * 
+ * Following are for all breakpoints : Desktop, Tabs, Mobile etc.
+ * Normal: For displaying  with image, product-name and another product attribute e.g. price,
+ * 
+ * Following sizes are for Mobile/Tabs, displaying product in different size containers
+ * Small: rending product in small area with smaill image and below product-name only,
+ * Large: displaying slightly bigger area with more than two product attributes.
+ * Thin: For displaying product name inside the image
+ * Full: For displaying product in full width of the display
+ */
+ export const PROD_DISPLAY_SIZE = {
+    SMALL: 'small',
+    NORMAL: 'normal',
+    LARGE: 'large',
+    THIN: 'thin',
+    FULL:'full',
+};
+
+
+
+/**
+ * 888888888888888888888888888888888888888888888888888888
+ * 
+ *             M O C K DATA FOR TESTING
+ * 
+ * &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+ */
+
+
+/**
+ * text to be displayed in the slider
+ * a message can have maximum length= 40 chars
+ * */
+ export const PROMO_SLIDER_MSGS = [
+    "Join our Community Wellness Event",
+    "Winter sala starts now,  visit our store",
+    "Please like and subscribe",
+    // "Please like and subscribe -123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412342 this is the end",
+];
+
+
+
 // banner display data
-export const banners = [
+export const HOME_BANNER_DATA = [
     {
         id: 1,
         heading1: "Welltech offerings",
@@ -66,79 +258,6 @@ export const banners = [
 ];
 
 
-/**
- * text to be displayed in the slider
- * a message can have maximum length= 40 chars
- * */
-export const slidermessage = [
-    "Join our Community Wellness Event",
-    "Winter sala starts now,  visit our store",
-    "Please like and subscribe",
-    // "Please like and subscribe -123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412341234123412342 this is the end",
-];
-
-
-/**
- * product display size
- * 
- * Following are for all breakpoints : Desktop, Tabs, Mobile etc.
- * Normal: For displaying  with image, product-name and another product attribute e.g. price,
- * 
- * Following sizes are for Mobile/Tabs, displaying product in different size containers
- * Small: rending product in small area with smaill image and below product-name only,
- * Large: displaying slightly bigger area with more than two product attributes.
- * Thin: For displaying product name inside the image
- * Full: For displaying product in full width of the display
- */
-export const productdisplay = {
-    Small: 'small',
-    Normal: 'normal',
-    Large: 'large',
-    Thin: 'thin',
-    Full:'full',
-};
-
-/**
- * Define Button text for Add Cart button
- */
-export const cartAddActionMessages = {
-    remove : 'Remove from cart',
-    add : 'Add to cart',
-};
-
-
-/**
- * Define Button text for Add Cart button
- */
- export const wishlistAddActionMessages = {
-    remove : 'Remove from Wishlist',
-    add : 'Add to Wishlist',
-};
-
-/**
- * Define view cart  messages
- */
-export const cartViewMessages = {
-    title: 'Your Cart',
-    marketing : 'Login/register for great deals and offers',
-    buttontext : 'Proceed to payment',
-    emptycart: 'Your cart is empty!',
-    emptycartletshop: 'You have no item in your shopping cart.\nLet\'s go buy something!',
-    emptycartimage: '/images/cart/emptycart.png',
-    emptyshopnow : 'Shop Now',
-    deletemessage : 'Delete this product from your cart.',
-};
-
-/**
- * Define view cart  messages
- */
- export const favouriteViewMessages = {
-    title: 'Your Wish List',
-    marketing : 'You can manage Wish-List at any time.',
-    deletemessage : 'Remove this product from your whish list.',
-    nothing:'You have not added any items yet.\n\nTo add items to your whish-list, look out for the heart symbol on the items.',
-    nofavourites:'/images/whishlist/nolist.png',
-};
 /**
  *      Product data : to be displayed on the product grid
  *  

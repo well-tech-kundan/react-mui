@@ -1,10 +1,11 @@
-import { Badge, Divider, ListItemButton, ListItemIcon } from "@mui/material";
+import { Badge, Divider, ListItemButton, ListItemIcon, useMediaQuery } from "@mui/material";
 import { ActionIconsContainerDesktop, ActionIconsContainerMobile, HeaderList } from "../../styles/appbar";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PersonIcon from "@mui/icons-material/Person";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Colors } from "../../styles/theme";
 import { useUIContext } from "../../context/ui";
+import { useTheme } from "@emotion/react";
 /**
  * An action icon has to be wapper inside a item-button/Item-icon
  * 
@@ -18,14 +19,18 @@ function Actions({ matches }) {
     /**
      * From UI context set add to cart variables for handling add to cart actions
      */
-    const { cart, setShowCart } = useUIContext();
-
+    const { cartState: { cart }, setShowCart } = useUIContext();
 
     /**
      * From UI context set add to wishList variables for handling add to cart actions
      */
     const { wishList, setShowWishList } = useUIContext();
 
+    //use theme of material styles
+    const theme = useTheme();
+
+    // define a variable to check if the breakpoint is below medium
+    const matchesIpad = useMediaQuery(theme.breakpoints.up('sm'));
     /**
      * Switch the container icon Mobile if matches otherwise use container icon desktop
      */

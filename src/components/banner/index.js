@@ -23,6 +23,7 @@ function Banner({ banners, displayComponent }) {
 
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('md'));
+    const matchesFold = useMediaQuery(theme.breakpoints.down('fold'));
 
     // define function for handling message array index
     const [messageIndex, setMessageIndex] = useState(0);
@@ -140,7 +141,7 @@ function Banner({ banners, displayComponent }) {
                 display={"flex"}
                 justifyContent="center"
                 alignItems={"center"}
-                height={matches ? '750px' : '600px'}
+                height={matchesFold ? '450px' : matches ? '750px' : '600px'}
             >
                 {/* show previous button only when prev is true */}
                 {prev &&

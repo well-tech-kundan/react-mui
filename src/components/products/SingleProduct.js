@@ -11,7 +11,7 @@ import {
 } from "../../styles/products";
 import ProductMeta from "./ProductMeta";
 import ProductDetail from "../productdetail";
-import { productdisplay } from "../../data";
+import { PROD_DISPLAY_SIZE } from "../../data";
 import { Tooltip } from "@mui/material";
 import useDialogModal from "../../hooks/useDialogModal";
 import useCart from "../../hooks/useCart";
@@ -21,12 +21,12 @@ import useWishList from "../../hooks/useWishList";
 function SingleProduct({ product, matches }) {
 
     //define a constant for showing product details box.
-    const [ProductDetailDialog, showProductDetailDialog, closeProductDialog] =
-        useDialogModal(ProductDetail);
+    const [ProductDetailDialog, showProductDetailDialog] =
+        useDialogModal(ProductDetail); 
 
 
     //define add to cart related variables to tbe used in the module
-    const { addToCart, addToCartText } = useCart(product);
+    const { addToCart, toggleActionTxt } = useCart(product);
 
 
     //define add to favourite related variable to tbe used in the module
@@ -46,7 +46,7 @@ function SingleProduct({ product, matches }) {
                 <StyledEngineProvider injectFirst>
                     <Product>
                         <ProductImage src={product.image} />
-                        <ProductMeta product={product} matches={matches} />
+                        <ProductMeta product={product} matches={matches} wishlistpg={false}/>
                         {/* add icon images for add to cart, share etc */}
                         <ProductActionsWrapper>
                             <Stack direction="row">
@@ -68,7 +68,7 @@ function SingleProduct({ product, matches }) {
                                 </ProductActionButton>
 
                                 {/* display show product details to screen icon, onclick open product details dialog box*/}
-                                <ProductActionButton onClick={() => showProductDetailDialog()}>
+                                <ProductActionButton onClick={showProductDetailDialog}>
                                     <Tooltip placement="left" title="Full view">
                                         <FitScreenIcon color="primary" />
                                     </Tooltip>
@@ -83,10 +83,10 @@ function SingleProduct({ product, matches }) {
                     <ProductAddtoCart
                         variant="contained"
                         show={product.price ? 1 : 0}
-                        size={productdisplay.Normal}
+                        size={PROD_DISPLAY_SIZE.NORMAL}
                         onClick={addToCart}
                     >
-                        {addToCartText}
+                        {toggleActionTxt}
                     </ProductAddtoCart>
                 )}
             </>

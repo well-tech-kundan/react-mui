@@ -6,7 +6,7 @@ import theme from './styles/theme';
 import Appbar from './components/appbar';
 
 import { UIProvider } from "./context/ui";
-import { banners, slidermessage, visionstatement, menuitems } from "./data";
+import { HOME_BANNER_DATA, PROMO_SLIDER_MSGS, VISION_STATEMENT, MENU_ITEMS } from "./data";
 import Footer from './components/footer';
 import AppDrawer from './components/drawer';
 import { containerdata } from './data/dummydata';
@@ -19,6 +19,7 @@ import Dashboard from './pages/dashboard';
 import Events from './pages/events';
 import Clubs from './pages/clubs';
 import Store from './pages/store';
+import ViewCart from './pages/viewcart';
 
 
 function App() {
@@ -28,8 +29,7 @@ function App() {
   useEffect(() => {
     // Update the document title using the browser API    
     document.title = `WellTech UI - Home`;
-  });
-
+  },[]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -53,12 +53,12 @@ function App() {
           <>
             <UIProvider>
               <BrowserRouter>
-                <Appbar menuitems={menuitems} />
+                <Appbar menuitems={MENU_ITEMS} />
                 <Routes>
 
                   {/* home page link */}
                   <Route path='/' exact element={
-                    <Home banners={banners} slidermessage={slidermessage} containerdata={containerdata} />
+                    <Home banners={HOME_BANNER_DATA} slidermessage={PROMO_SLIDER_MSGS} containerdata={containerdata} />
                   }
                   />
 
@@ -80,14 +80,21 @@ function App() {
                   }
                   />
 
-                  {/* dashboard page link */}
+                  {/* event page link */}
                   <Route path='/events' exact element={
                     <Events />
                   }
                   />
+
+
+                  {/* cart-view page link */}
+                  <Route path='/viewcart' exact element={
+                    <ViewCart />
+                  }
+                  />
                 </Routes>
-                <Footer statement={visionstatement} />
-                <AppDrawer menuitems={menuitems} />
+                <Footer statement={VISION_STATEMENT} />
+                <AppDrawer menuitems={MENU_ITEMS} />
                 <Cart />
                 <WhishList />
                 <SearchBox />

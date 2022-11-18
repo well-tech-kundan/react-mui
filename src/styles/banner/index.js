@@ -25,6 +25,11 @@ export const BannerContainer = styled(Box)(() => ({
     [theme.breakpoints.down('sm')]: {
         flexDirection: 'column',
         alignItems: 'center'
+    },
+
+    //introduce break point for banner to be displayed on top of text
+    [theme.breakpoints.down('fold')]: {
+        height: '90%',
     }
 }));
 
@@ -105,6 +110,10 @@ export const BannerImage = styled('img')(({ src, theme }) => ({
     //width of image for small
     [theme.breakpoints.down('sm')]: {
         width: '300px'
+    },
+    //width of image for small
+    [theme.breakpoints.down('fold')]: {
+        width: '100px'
     }
 }));
 //define the banner content theme
@@ -116,6 +125,10 @@ export const BannerContent = styled(Box)(() => ({
     maxWidth: 420,
     padding: '30px',
     //alignItems: 'center'
+    //for mobile device change the font size
+    [theme.breakpoints.down('fold')]: {
+        padding: '5px',
+    },
 
 }));
 
@@ -128,7 +141,11 @@ export const BannerTitle = styled(Typography)(({ theme }) => ({
     //for mobile device change the font size
     [theme.breakpoints.down('sm')]: {
         fontSize: '42px'
-    }
+    },
+    //for mobile device galaxy fold 
+    [theme.breakpoints.down('fold')]: {
+        fontSize: '25px'
+    },
 }));
 
 // define the banner description
@@ -137,12 +154,18 @@ export const BannerDescription = styled(Typography)(({ theme }) => ({
     letterSpacing: 1.25,
     marginBottom: '3em',
 
-    //for mobile device change the font size
+    //for mobile device 
     [theme.breakpoints.down('md')]: {
         lineHeight: 1.15,
         letterSpacing: 1.15,
         marginBottom: '1.5em',
-    }
+    },
+    //for mobile device galaxy fold
+    [theme.breakpoints.down('fold')]: {
+        lineHeight: 1,
+        letterSpacing: 0.75,
+        marginBottom: '1em',
+    },
 }));
 
 
@@ -166,5 +189,11 @@ export const BannerButton = styled(Button, {
     [theme.breakpoints.down("sm")]: {
         padding: "10px 0px",
         fontSize: "14px",
+    },
+    //for mobile device galaxy fold
+    [theme.breakpoints.down('fold')]: {
+        padding: "7px 0px ",
+        fontSize: "10px",
+        width: "50%",
     },
 }));

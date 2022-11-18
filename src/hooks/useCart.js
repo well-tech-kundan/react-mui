@@ -1,54 +1,80 @@
 import { useUIContext } from "../context/ui";
-import { cartAddActionMessages } from "../data";
+import { CART_ACTION_MSG } from "../data";
 
 /** 
  * This hook for handling cart data
+ * For adding updating and deleting it will use Reducer
+ * For queries it will manage itself
  */
 function useCart(product) {
 
-    const { cart, setCart } = useUIContext();
+    const { cartState: { cart }, dispatch } = useUIContext();
+
+
 
     /**
      * this function will add/remove selected product from UI Context to cart using 
      */
     const addToCart = () => {
-
-        // add the prodcut if doesnot exist other wise remove the product
+        product.quantity= 1;
+        // add the prodcut if doesnot exist other wise remove the product;
         cart.findIndex((c) => c.id === product.id) >= 0 ?
-            setCart(cart.filter(c => c.id !== product.id))
+                dispatch({
+                    type: CART_ACTION.REMOVE,
+                    payload: product,
+                })
             :
-            setCart(c => [...c, product]);
+                dispatch({
+                    type: CART_ACTION.ADD,
+                    payload: product,
+                })
     }//end pf function add to cart
 
     /**
      * this function will add/remove selected product from UI Context to cart using 
      */
-     const updateCart = (quantity) => { 
-
+    const updateCart = (quantity) => {
         // add the prodcut if doesnot exist other wise remove the product
-        if (quantity >= 1 ) {
-            product.quantity = quantity;
-            setCart(c => [...c, product]);
-        }else {
-            setCart(cart.filter(c => c.id !== product.id));
-        }
-            
+        // console.log("In update cart >> quantity :: " + quantity);
+        // console.log("updated before quantity :: "+product.quantity);
+        dispatch({
+            type: CART_ACTION.UPDATE,
+            payload: {
+                id: product.id,
+                qty: quantity,
+            },
+        })
+        // console.log("updated quantity :: "+product.quantity);
     }//end pf function add to cart
 
     /**
      * This variable will hold display message for add to cart call
      */
-    const addToCartText = 
-
-        // add the prodcut if doesnot exist other wise remove the product
+    // const toggleActionTxt = 
+    //     product?
+    //     dispatch({
+    //         type: CART_ACTION.TOGGLE,
+    //         payload:  {
+    //             id:product.id,
+    //         },
+    //     }):CART_ACTION_MSG.ADD
+    // add the prodcut if doesnot exist other wise remove the product
+    const toggleActionTxt =
         cart.findIndex((c) => c.id === product.id) >= 0 ?
-            cartAddActionMessages.remove
+            CART_ACTION_MSG.REMOVE
             :
-            cartAddActionMessages.add;
-    
+            CART_ACTION_MSG.ADD;
 
-    return { addToCart, addToCartText }
+
+    return { addToCart, toggleActionTxt, updateCart }
 
 }
 
 export default useCart;
+
+export const CART_ACTION = {
+    ADD: "ADD_TO_CART",
+    REMOVE: "REMOVE_FROM_CART",
+    UPDATE: "CHANGE_CART_QTY",
+    TOGGLE: "AVAILABLE_ACTION",
+};

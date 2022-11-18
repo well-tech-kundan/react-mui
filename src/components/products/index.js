@@ -1,7 +1,7 @@
 import { Grid, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { Container } from "@mui/system";
-import { productdisplay } from "../../data";
+import { PROD_DISPLAY_SIZE } from "../../data";
 import SingleProduct from "./SingleProduct";
 import SingleProductLarge from "./SingleProductLarge";
 import SingleProductDesktop from "./SingleProductDesktop";
@@ -15,18 +15,25 @@ import SingleProductSmall from "./SingleProductSmall";
  * @param {size} provide different dispay area for product 
  * @returns 
  */
-function Products({ products: contentData, size }) {
+function Products({ products, size }) {
 
     //use theme of material styles
     const theme = useTheme();
 
     // define a variable to check if the breakpoint is below medium i.e. fo tabs/mobile
-    const matches = useMediaQuery(theme.breakpoints.down('lg'));
+    const matches = useMediaQuery(theme.breakpoints.down('md'));
+    const matchesIpad = useMediaQuery(theme.breakpoints.up('sm'));
+    const matchesSmall = useMediaQuery(theme.breakpoints.down('sm'));
+    const matchesGalaxyPro = useMediaQuery(theme.breakpoints.up('galaxy'));
+    const matchesGalaxy = useMediaQuery(theme.breakpoints.down('galaxy'));
+    const matchesIphsmallUP = useMediaQuery(theme.breakpoints.up('iphsmall'));
     const matchesIphsmall = useMediaQuery(theme.breakpoints.down('iphsmall'));
+    const matchesFold = useMediaQuery(theme.breakpoints.down('fold'));
+    const matchesFoldUP = useMediaQuery(theme.breakpoints.up('fold'));
 
     //prepare the product data for rendering
-    const renderProduct = contentData.map(product => (
-        
+    const renderProduct = products.map(product => (
+
         <Grid
             item
             key={product.id}
@@ -38,18 +45,19 @@ function Products({ products: contentData, size }) {
             display={"flex"}
             flexDirection={"column"}
             justifyContent={"center"}
+            alignItems={"flex-start"}
         >
 
             {(matches) ? (
-                (size === productdisplay.Large) ?
+                (size === PROD_DISPLAY_SIZE.LARGE) ?
                     (
                         <SingleProductLarge product={product} matches={matches} />
                     ) : (
-                        (size === productdisplay.Thin) ?
+                        (size === PROD_DISPLAY_SIZE.THIN) ?
                             (
                                 <SingleProductThin product={product} />
                             ) : (
-                                (size === productdisplay.Small) ?
+                                (size === PROD_DISPLAY_SIZE.SMALL) ?
                                     (
                                         <SingleProductSmall product={product} />
                                     ) : (
@@ -68,42 +76,43 @@ function Products({ products: contentData, size }) {
     return (
 
         <Container>
-            <Grid
+            <Grid 
                 container
                 flexWrap={{ xs: "nowrap", md: "wrap", lg: "wrap" }}
 
                 //add spacing between images displayed
                 spacing={{
-                    //for smalll product display set size to 2 and other display set 18
+                    //for smalll product display set size to 2 and other display set > 2
+
 
 
                     xs:
-                        (size === productdisplay.Small) ? (
-                            (matchesIphsmall ? 2 : 4)
+                        (size === PROD_DISPLAY_SIZE.SMALL) ? (
+                            (matchesFold? 4 : matchesIphsmall ? 2 : matchesIpad && matches ? 5 : 4)
                         ) :
-                            (size === productdisplay.Thin) ? (
-                                (matchesIphsmall ? 16 : 14)
+                            (size === PROD_DISPLAY_SIZE.THIN) ? (
+                                matchesFold ? 5 : ((matchesFoldUP && matchesIphsmall) ? 5 : matchesIphsmall ? 16 : (matchesIphsmallUP && matchesGalaxy) ? 5 : (matchesGalaxyPro && matchesSmall) ? 4: matchesSmall ? 14 : matchesIpad && matches ? 15 : 5)
                             ) :
-                                (size === productdisplay.Normal) ? (
-                                    12
+                                (size === PROD_DISPLAY_SIZE.NORMAL) ? (
+                                    (matchesFold ? 6 : (matchesFoldUP && matchesIphsmall) ? 3 : matchesIphsmall ? 12 : (matchesIphsmallUP && matchesGalaxy) ? 5: (matchesGalaxyPro && matchesSmall) ? 4: matchesSmall ? 10 : 12)
                                 ) : (
-                                    (matchesIphsmall ? 18 : 22)
+                                    matchesFold? 9 : (matchesFoldUP && matchesIphsmall) ? 9 : matchesIphsmall ? 22 : (matchesIphsmallUP && matchesGalaxy) ? 5 : matchesGalaxy? 15 : matchesSmall ? 5 : matchesIpad && matches ? 20 : 10
                                 )
 
                     ,
 
-                    //for smalll product display set size to 2 and other display set 18
+                    //for smalll product display set size to 11 and other display set different size
                     sm:
-                        (size === productdisplay.Small) ? (
-                            1
+                        (size === PROD_DISPLAY_SIZE.SMALL) ? (
+                            (matchesIpad && matches ? 5 : 1)
                         ) :
-                            (size === productdisplay.Thin) ? (
-                                (matchesIphsmall ? 11 : 12)
+                            (size === PROD_DISPLAY_SIZE.THIN) ? (
+                                (matchesIphsmall ? 11 : matchesGalaxy && matchesSmall ? 5: matchesIpad && matches ? 6 : 12)
                             ) :
-                                (size === productdisplay.Normal) ? (
-                                    7
+                                (size === PROD_DISPLAY_SIZE.NORMAL) ? (
+                                    (matchesIpad && matches ? 6 : 7)
                                 ) : (
-                                    18
+                                    (matchesIpad && matches ? 6 : 18)
                                 )
 
                     ,
@@ -111,9 +120,10 @@ function Products({ products: contentData, size }) {
                     lg: 4
                 }}
                 overflow={{ xs: "auto", sm: "auto" }}
-                p={1}
+                p={size === (PROD_DISPLAY_SIZE.LARGE && (matchesFold || matchesIphsmall)) ? 0 : 1}
 
                 justifyContent={"flex-start"}
+                alignItems={"flex-start"}
 
                 sx={
                     {
@@ -126,7 +136,7 @@ function Products({ products: contentData, size }) {
                     }
                 }
 
-                columns={{ xs: 3, sm: 8, md: 12 }}
+                columns={{ xs: PROD_DISPLAY_SIZE.LARGE ? 2.35 : 4, sm: 8, md: 12 }}
 
             >
                 {/* // display product  */}

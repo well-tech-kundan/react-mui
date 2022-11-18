@@ -1,13 +1,16 @@
-import { Typography } from "@mui/material";
+import { useTheme } from "@emotion/react";
+import { Typography, useMediaQuery } from "@mui/material";
 import { BannerButton,  BannerContent, BannerDescription, BannerImage, BannerTitle } from "../../styles/banner";
 
 function BannerDisplay({ banner, matches }) {
+    const theme = useTheme();
+    const matchesFold = useMediaQuery(theme.breakpoints.down('fold'));
     return (
         <>
             <BannerImage src={banner.image} />
             <BannerContent>
                 {/* display banner heading-1 */}
-                <Typography variant={matches ? "h6" : "h5"}>{banner.heading1}</Typography>
+                <Typography variant={matchesFold ? "1em" : matches ? "h6" : "h5"}>{banner.heading1}</Typography>
 
                 {/* display banner main header */}
                 <BannerTitle variant={matches ? "h4" : "h2"}>
@@ -15,7 +18,7 @@ function BannerDisplay({ banner, matches }) {
                 </BannerTitle>
 
                 {/* Display Banner description */}
-                <BannerDescription variant="subtitle">
+                <BannerDescription variant={matchesFold ? "body2" : "subtitle"}>
                     {banner.description}
                 </BannerDescription>
 

@@ -3,9 +3,8 @@
 
 import { IconButton, Box, List, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { Colors, DrawerWidth } from "../theme";
+import theme, { Colors, DrawerWidth } from "../theme";
 import "@fontsource/montez";
-import { textPopUpTop } from "../../animation";
 
 //define the app-bar container, note BOX is like div in html
 export const AppbarContainer = styled(Box)(() => ({
@@ -25,6 +24,10 @@ export const AppbarHeader = styled(Typography)(() => ({
     fontSize: '4em',
     fontFamily: '"Montez", "cursive"',
     color: Colors.secondary,
+    //for small galaxy  mobile <= 300
+    [theme.breakpoints.down("fold")]: {
+        fontSize: '2em',
+    },
 }));
 
 

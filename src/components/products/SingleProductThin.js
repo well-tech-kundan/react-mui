@@ -9,7 +9,7 @@ import {
     ProductFavButton, ProductImagThin, ProductThin
 } from "../../styles/products";
 import ProductMetaThin from "./ProductMetaThin";
-import { productdisplay } from "../../data";
+import { PROD_DISPLAY_SIZE } from "../../data";
 import ProductDetail from "../productdetail";
 import useDialogModal from "../../hooks/useDialogModal";
 import useCart from "../../hooks/useCart";
@@ -19,11 +19,11 @@ import useWishList from "../../hooks/useWishList";
 function SingleProductThin({ product }) {
 
     // define dialog modal for showing product dialog details
-    const [ProductDetailDialog, showProductDetailDialog, closeProductDialog] =
+    const [ProductDetailDialog, showProductDetailDialog] =
         useDialogModal(ProductDetail);
 
     //define add to cart related variables to tbe used in the module
-    const { addToCart, addToCartText } = useCart(product);
+    const { addToCart, toggleActionTxt } = useCart(product);
 
     //define add to favourite related variable to tbe used in the module
     const { addToWishList, addedToWishes } = useWishList(product);
@@ -58,12 +58,12 @@ function SingleProductThin({ product }) {
                                 </ProductFavButton>
 
                                 {/* display share content icon */}
-                                <ProductActionButton size={productdisplay.Small}>
+                                <ProductActionButton size={PROD_DISPLAY_SIZE.SMALL}>
                                     <ShareIcon color="primary" />
                                 </ProductActionButton>
 
                                 {/* display show product details to screen icon, onclick open product details dialog box*/}
-                                <ProductActionButton onClick={() => showProductDetailDialog()}>
+                                <ProductActionButton onClick={showProductDetailDialog}>
                                     <FitScreenIcon color="primary" />
                                 </ProductActionButton>
                             </Stack>
@@ -76,10 +76,10 @@ function SingleProductThin({ product }) {
                     <ProductAddtoCart
                         variant="contained"
                         show={product.price ? 1 : 0}
-                        size={productdisplay.Thin}
+                        size={PROD_DISPLAY_SIZE.THIN}
                         onClick={addToCart}
                     >
-                        {addToCartText}
+                        {toggleActionTxt}
                     </ProductAddtoCart>
                 )}
             </>

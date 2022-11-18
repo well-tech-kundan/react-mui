@@ -1,4 +1,4 @@
-import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import {  ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import { AppbarContainer, AppbarHeader, HeaderList } from "../../styles/appbar";
 import SearchIcon from "@mui/icons-material/Search";
 import Actions from "./actions";
@@ -6,33 +6,40 @@ import { lighten } from "polished";
 import { Colors } from "../../styles/theme";
 
 import { useUIContext } from "../../context/ui";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function AppbarDesktop({ menuitems: contentData, matches }) {
 
 
   const { setShowSearchBox } = useUIContext();
 
+
   //prepare the menu data for rendering
   const renderMenu = contentData.map((menuitem) => (
 
     <ListItemText
       key={menuitem.id}
-     
+
       sx={{
-        "&:a:visted": { color: Colors.dove_gray } ,
+        textDecoration: 'none',
         p: 1,
         // on mouse hover change the colour the button
         "&:hover": {
-          background: lighten(0.1, Colors.dove_gray),
+          background: lighten(0.1, Colors.secondary),
         },
 
       }}>
 
       {/* using textdecoration for removing underline from the displayed menu name  */}
-      <Link style={{textDecoration: 'none', decoration: 'none', "&:visted":'secondary'}} to={menuitem.url}>
+      <NavLink  style={{
+        textDecoration: 'none',
+        color: Colors.dark,
+      }}
+        to={menuitem.url}
+      >
+
         {menuitem.name}
-      </Link>
+      </NavLink>
     </ListItemText>
 
   ));

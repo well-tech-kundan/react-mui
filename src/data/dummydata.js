@@ -144,7 +144,7 @@ export const containerdata = [
                 image: "/images/events/evt-1.jpg",
                 inStock: faker.helpers.arrayElement([0, 3, 5, 6, 7]),
                 fastDelivery: faker.datatype.boolean(),
-                rating: "5/5",
+                rating: 5,
                 displayProduct: true,
 
             },
@@ -159,7 +159,7 @@ export const containerdata = [
                 image: "/images/events/evt-2.jpg",
                 inStock: faker.helpers.arrayElement([0, 3, 5, 6, 7]),
                 fastDelivery: faker.datatype.boolean(),
-                rating: "4.5/5",
+                rating: 4.5,
                 displayProduct: true,
             },
             {
@@ -173,7 +173,7 @@ export const containerdata = [
                 image: "/images/events/evt-3.jpg",
                 inStock: faker.helpers.arrayElement([0, 3, 5, 6, 7]),
                 fastDelivery: faker.datatype.boolean(),
-                rating: "5/5",
+                rating: 5,
                 displayProduct: true,
             },
             {
@@ -187,7 +187,7 @@ export const containerdata = [
                 image: "/images/events/evt-4.jpg",
                 inStock: faker.helpers.arrayElement([0, 3, 5, 6, 7]),
                 fastDelivery: faker.datatype.boolean(),
-                rating:"4.5/5",
+                rating:4.5,
                 displayProduct: true,
             },
             {
@@ -201,7 +201,7 @@ export const containerdata = [
                 image: "/images/events/evt-5.jpg",
                 inStock: faker.helpers.arrayElement([0, 3, 5, 6, 7]),
                 fastDelivery: faker.datatype.boolean(),
-                rating: "5/5",
+                rating: 5,
                 displayProduct: true,
             }
         ]
@@ -210,7 +210,7 @@ export const containerdata = [
         id: 3,
         title: "Top 10 Contents",
         productdisplay: "thin",
-        displaylimit: "5",
+        displaylimit: 5,
         description: "Top 10 Most Popular Types of Contents this Week",
         data: [
             {
@@ -279,7 +279,7 @@ export const containerdata = [
         id: 4,
         title: "Our Products",
         productdisplay: "normal",
-        displaylimit: "5",
+        displaylimit: 5,
         description: "Browse our list of highest trending products",
         data: [
             {
